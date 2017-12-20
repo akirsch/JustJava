@@ -4,16 +4,18 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
+
 import java.text.NumberFormat;
 
 /**
-
- This app displays an order form to order coffee.
+ * This app displays an order form to order coffee.
  */
 public class MainActivity extends AppCompatActivity {
 
     int quantity = 0;
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +27,16 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-       int price = calculatePrice();
-       displayMessage(createOrderSummary(price));
+        CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.whippedCream_checkbox);
+        CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.chocolate_checkbox);
+        Boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
+        Boolean hasChocolate = chocolateCheckBox.isChecked();
+        int price = calculatePrice();
+        displayMessage(createOrderSummary(price, hasWhippedCream, hasChocolate));
     }
 
     /**
      * Calculates the price of the order.
-     *
      */
     public int calculatePrice() {
         return quantity * 5;
@@ -39,12 +44,17 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * creates order summary
+     *
      * @param price of cup og coffee
+     * @param hasWhippedCream is whipped cream check box had been checked.
+     * @param hasChocolate whether user wants to add chocolate
      * @return string containing order information
      */
 
-    public String createOrderSummary (int price){
-        return "Name: Adam Kirsch\nQuantity: " + quantity + "\nTotal: $" + price + "\nThank you!";
+    public String createOrderSummary(int price, Boolean hasWhippedCream, Boolean hasChocolate) {
+        return "Name: Adam Kirsch\nAdd whipped cream? " + hasWhippedCream +
+                "\nAdd chocolate? " + hasChocolate + "\nQuantity: "+ quantity + "\nTotal: $"
+                + price + "\nThank you!";
     }
 
     /**

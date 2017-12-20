@@ -8,4 +8,5 @@
     <string name="orderSummary">Order Summary</string>
     <string name="toppings">toppings</string>
     <string name="Topping1">Whipped Cream</string>
+    <string name="Topping2">Chocolate</string>
 </resources>
